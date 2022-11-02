@@ -27,6 +27,8 @@ In order to easily run the code, you must have installed the Keras framework wit
 $ cd darknet && make
 ```
 
+**Note**: In case that you are using MacOS to install darknet, make sure you switch gcc version that be able to compile darknet. Here is the example of how to install gcc for mac, [link](https://github.com/microsoft/LightGBM/issues/3#issuecomment-525119618). Also, edit this [this](./darknet/Makefile#22) gcc version.
+
 **The current version was tested in an Ubuntu 16.04 machine, with Keras 2.2.4, TensorFlow 1.5.0, OpenCV 2.4.9, NumPy 1.14 and Python 2.7.**
 
 ## Download Models
@@ -45,7 +47,7 @@ Use the script "run.sh" to run our ALPR approach. It requires 3 arguments:
 * __CSV file (-c):__ specify an output CSV file.
 
 ```shellscript
-$ bash get-networks.sh && bash run.sh -i samples/test -o /tmp/output -c /tmp/output/results.csv
+$ bash get-networks.sh && bash run.sh -i ./samples/test -o ./tmp/output -c ./tmp/output/results.csv
 ```
 
 ## Training the LP detector
