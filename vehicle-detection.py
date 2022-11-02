@@ -28,7 +28,7 @@ if __name__ == '__main__':
 		vehicle_net  = dn.load_net(vehicle_netcfg, vehicle_weights, 0)
 		vehicle_meta = dn.load_meta(vehicle_dataset)
 
-		imgs_paths = list(map(lambda x: x.encode('utf-8'), image_files_from_folder(input_dir)))
+		imgs_paths = image_files_from_folder(input_dir)
 		imgs_paths.sort()
 
 		if not isdir(output_dir):
@@ -42,9 +42,9 @@ if __name__ == '__main__':
 
 			bname = basename(splitext(img_path)[0])
 
-			R,_ = detect(vehicle_net, vehicle_meta, img_path ,thresh=vehicle_threshold)
+			R,_ = detect(vehicle_net, vehicle_meta, img_path.encode('utf-8') ,thresh=vehicle_threshold)
 
-			R = [r for r in R if r[0] in ['car','bus']]
+			R = [r for r in R if r[0] in [b'car', b'bus']]
 
 			print('\t\t%d cars found' % len(R))
 

@@ -21,9 +21,9 @@ if __name__ == '__main__':
 
 		ocr_threshold = .4
 
-		ocr_weights = 'data/ocr/ocr-net.weights'
-		ocr_netcfg  = 'data/ocr/ocr-net.cfg'
-		ocr_dataset = 'data/ocr/ocr-net.data'
+		ocr_weights = 'data/ocr/ocr-net.weights'.encode('utf-8')
+		ocr_netcfg  = 'data/ocr/ocr-net.cfg'.encode('utf-8')
+		ocr_dataset = 'data/ocr/ocr-net.data'.encode('utf-8')
 
 		ocr_net  = dn.load_net(ocr_netcfg, ocr_weights, 0)
 		ocr_meta = dn.load_meta(ocr_dataset)
@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
 			bname = basename(splitext(img_path)[0])
 
-			R,(width,height) = detect(ocr_net, ocr_meta, img_path ,thresh=ocr_threshold, nms=None)
+			R,(width,height) = detect(ocr_net, ocr_meta, img_path.encode('utf-8') ,thresh=ocr_threshold, nms=None)
 
 			if len(R):
 

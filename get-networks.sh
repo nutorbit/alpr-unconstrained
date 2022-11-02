@@ -2,9 +2,10 @@
 
 set -e
 
-mkdir data/lp-detector -p
-mkdir data/ocr -p
-mkdir data/vehicle-detector -p
+mkdir data
+mkdir data/lp-detector
+mkdir data/ocr
+mkdir data/vehicle-detector
 
 wget -c -N http://sergiomsilva.com/data/eccv2018/lp-detector/wpod-net_update1.h5   -P data/lp-detector/
 wget -c -N http://sergiomsilva.com/data/eccv2018/lp-detector/wpod-net_update1.json -P data/lp-detector/
