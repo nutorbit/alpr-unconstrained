@@ -2,4 +2,7 @@
 *.a
 *.so
 *.csv
+tmp/
 data/
+
+.DS_Store
