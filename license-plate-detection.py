@@ -2,6 +2,7 @@ import sys, os
 import keras
 import cv2
 import traceback
+import numpy as np
 
 from src.keras_utils 			import load_model
 from glob 						import glob
@@ -9,6 +10,8 @@ from os.path 					import splitext, basename
 from src.utils 					import im2single
 from src.keras_utils 			import load_model, detect_lp
 from src.label 					import Shape, writeShapes
+
+from PIL import Image
 
 
 def adjust_pts(pts,lroi):
@@ -48,11 +51,18 @@ if __name__ == '__main__':
 			if len(LlpImgs):
 				Ilp = LlpImgs[0]
 				Ilp = cv2.cvtColor(Ilp, cv2.COLOR_BGR2GRAY)
-				Ilp = cv2.cvtColor(Ilp, cv2.COLOR_GRAY2BGR)
+				Ilp = cv2.cvtColor(Ilp, cv2.COLOR_GRAY2BGR) * 255.
 
 				s = Shape(Llp[0].pts)
 
-				cv2.imwrite('%s/%s_lp.png' % (output_dir,bname),Ilp*255.)
+				# TODO: find smarter way to do this
+				shape = Ilp.shape
+				img = Image.fromarray(Ilp.astype(np.uint8)[:int(shape[0] * 0.7), :shape[1]])
+				shape = img.size
+				new_shape = (shape[0] * 3, shape[1] * 3)
+				img = img.resize(new_shape, Image.ANTIALIAS)
+				img.save('%s/%s_lp.png' % (output_dir, bname))
+
 				writeShapes('%s/%s_lp.txt' % (output_dir,bname),[s])
 
 	except:
