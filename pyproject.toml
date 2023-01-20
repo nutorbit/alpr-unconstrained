@@ -9,6 +9,8 @@ python = "^3.8"
 opencv-python = "^4.6.0"
 keras = "^2.10.0"
 tensorflow-macos = "^2.10.0"
+pytesseract = "^0.3.10"
+tesserocr = "^2.5.2"
 
 [tool.poetry.dev-dependencies]
 
