@@ -96,10 +96,10 @@ python license-plate-detection.py $output_dir $lp_model
 python license-plate-thai-ocr.py $output_dir
 
 # Draw output and generate list
-python gen-outputs.py $input_dir $output_dir > $csv_file
+# python gen-outputs.py $input_dir $output_dir > $csv_file
 
 # Clean files and draw output
-# rm $output_dir/*_lp.png
+rm $output_dir/*_lp.png
 rm $output_dir/*car.png
 rm $output_dir/*_cars.txt
 rm $output_dir/*_lp.txt

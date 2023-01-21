@@ -4,7 +4,7 @@ import numpy as np
 import traceback
 
 import darknet.python.darknet as dn
-import pytesseract
+import easyocr
 
 from os.path 				import splitext, basename
 from glob					import glob
@@ -18,7 +18,8 @@ from PIL import Image
 if __name__ == '__main__':
 
 	try:
-	
+		reader = easyocr.Reader(['th'])
+
 		input_dir  = sys.argv[1]
 		output_dir = input_dir
 
@@ -32,13 +33,12 @@ if __name__ == '__main__':
 
 			bname = basename(splitext(img_path)[0])
    
-			img = Image.open(img_path)
-			img = img.convert("L")
-			lp_str = pytesseract.image_to_string(img, lang="tha", )
-			print(bname, lp_str)
+			result = reader.readtext(img_path, detail = 0)
+
+			print(bname, result)
    
 			with open('%s/%s_str.txt' % (output_dir, bname),'w') as f:
-				f.write(lp_str + '\n')
+				f.write(", ".join(result) + '\n')
 
 	except:
 		traceback.print_exc()
